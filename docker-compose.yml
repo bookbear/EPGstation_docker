@@ -1,0 +1,20 @@
+collelog-EPGstation:
+  image: collelog/epgstation:master-alpine-rpi4-arm64v8
+  container_name: kuma
+  privileged: true
+  ports:
+    - "8888:8888"
+  devices:
+          - /dev/dri:/dev/dri
+          - /dev/video10:/dev/video10
+          - /dev/video11:/dev/video11
+          - /dev/video12:/dev/video12
+          - /dev/video13:/dev/video13
+          - /dev/media0:/dev/media0
+  volumes:
+          - /etc/localtime:/etc/localtime:ro
+          - /mnt/disk1:/mnt/disk1
+          - ${PWD}/config:/opt/epgstation/config
+          - ${PWD}/data:/opt/epgstation/data
+          - ${PWD}/logs:/opt/epgstation/logs
+  restart: unless-stopped
